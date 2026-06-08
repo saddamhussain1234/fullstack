@@ -1,6 +1,6 @@
 # Office Record Manager Pro
 
-Office Record Manager Pro is an enterprise-grade, secure, and modern Full Stack Employee & Office Record Management Platform. It enables organizations to manage employee files, department rosters, office contact directories, and automatically generate professional employee corporate summaries via an AI Integration Layer (OpenAI with template-based offline fallbacks).
+Office Record Manager Pro is an enterprise-grade, secure, and modern Full Stack Employee & Office Record Management Platform. It enables organizations to manage employee files, department rosters, office contact directories, and automatically generate professional employee corporate summaries via an AI Integration Layer (Groq with template-based offline fallbacks).
 
 ---
 
@@ -13,7 +13,7 @@ graph TD
     Client[React Frontend / SPA] -->|HTTP REST + Bearer JWT| Gateway[FastAPI Backend / Uvicorn]
     Gateway -->|CORS / Middleware| Router[API Routers]
     Router -->|RBAC Guard| Service[Service Layer]
-    Service -->|AI Summaries| AIService[AI Service / OpenAI or Template Fallback]
+    Service -->|AI Summaries| AIService[AI Service / Groq or Template Fallback]
     Service -->|Database Queries| Repo[Repository Layer]
     Repo -->|ORM Mapping| DB[(PostgreSQL Database)]
     Repo -.->|Activity & Audit Logging| Audit[Activity/Audit Logs]
@@ -98,7 +98,7 @@ The application implements JWT authentication with refresh token rotation.
    JWT_SECRET_KEY=supersecretkeyofficemanagerpro12345
    JWT_ALGORITHM=HS256
    ACCESS_TOKEN_EXPIRE_MINUTES=60
-   OPENAI_API_KEY=your-api-key-here
+   GROQ_API_KEY=your-api-key-here
    ```
 5. Run the server locally:
    ```bash

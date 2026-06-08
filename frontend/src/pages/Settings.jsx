@@ -51,7 +51,7 @@ const Settings = () => {
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', py: 1 }}>
               <Box>
                 <Typography variant="body1" sx={{ color: '#f3f4f6', fontWeight: 600 }}>AI Bio Generation Falling-Back</Typography>
-                <Typography variant="caption" sx={{ color: '#6b7280' }}>OpenAI integration fallback system status</Typography>
+                <Typography variant="caption" sx={{ color: '#6b7280' }}>Groq API integration fallback system status</Typography>
               </Box>
               <Chip label="LOCAL TEMPLATES FALLBACK ENABLED" color="warning" size="small" sx={{ fontWeight: 600 }} />
             </Box>

@@ -1,15 +1,13 @@
 import os
-from openai import OpenAI
+from groq import Groq
 
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
 class AIService:
     def __init__(self):
-        self.api_key = OPENAI_API_KEY
+        self.api_key = GROQ_API_KEY
         if self.api_key:
-            # Supports custom base url or OpenAI-compatible configurations as well
-            base_url = os.getenv("OPENAI_API_BASE", None)
-            self.client = OpenAI(api_key=self.api_key, base_url=base_url)
+            self.client = Groq(api_key=self.api_key)
         else:
             self.client = None
 
@@ -28,7 +26,7 @@ class AIService:
             )
             
             response = self.client.chat.completions.create(
-                model=os.getenv("OPENAI_MODEL_NAME", "gpt-3.5-turbo"),
+                model=os.getenv("GROQ_MODEL_NAME", "llama3-8b-8192"),
                 messages=[
                     {"role": "system", "content": "You are an expert HR writer specializing in corporate team profiles and biographies."},
                     {"role": "user", "content": prompt}
@@ -39,7 +37,7 @@ class AIService:
             return response.choices[0].message.content.strip()
         except Exception as e:
             # Gracefully handle API failures or timeout issues by falling back
-            print(f"OpenAI bio generation failed: {e}. Falling back to template-based bio.")
+            print(f"Groq bio generation failed: {e}. Falling back to template-based bio.")
             return self._generate_template_bio(name, designation, department, experience)
 
     def _generate_template_bio(self, name: str, designation: str, department: str, experience: str) -> str:
