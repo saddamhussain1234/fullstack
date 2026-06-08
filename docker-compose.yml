@@ -1,0 +1,62 @@
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: office-manager-db
+    restart: always
+    environment:
+      POSTGRES_DB: officedb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d officedb"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build: ./backend
+    container_name: office-manager-backend
+    restart: always
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/officedb
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: officedb
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      JWT_SECRET_KEY: supersecretkeyofficemanagerpro12345
+      JWT_ALGORITHM: HS256
+      ACCESS_TOKEN_EXPIRE_MINUTES: 60
+      # Provide open API key if needed, else local template fallback is active
+      OPENAI_API_KEY: ""
+    ports:
+      - "8000:8000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  frontend:
+    build: ./frontend
+    container_name: office-manager-frontend
+    restart: always
+    depends_on:
+      backend:
+        condition: service_healthy
+    environment:
+      - VITE_API_URL=http://localhost:8000
+    ports:
+      - "3000:80"
+
+volumes:
+  pgdata:
+    driver: local

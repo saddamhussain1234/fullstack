@@ -1,0 +1,64 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: office-backend
+  namespace: default
+  labels:
+    app: office-backend
+    arch: "5"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: office-backend
+  template:
+    metadata:
+      labels:
+        app: office-backend
+    spec:
+      containers:
+        - name: backend
+          image: 203557140324.dkr.ecr.us-east-1.amazonaws.com/backend-app:latest
+          ports:
+            - containerPort: 8000
+          env:
+            - name: DATABASE_URL
+              value: "postgresql://postgres:postgres@172.31.47.210:5432/officedb"
+            - name: JWT_SECRET_KEY
+              value: "supersecretkeyofficemanagerpro12345"
+            - name: JWT_ALGORITHM
+              value: "HS256"
+            - name: ACCESS_TOKEN_EXPIRE_MINUTES
+              value: "60"
+          resources:
+            requests:
+              cpu: "200m"
+              memory: "256Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 30
+            periodSeconds: 15
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: office-backend-svc
+  namespace: default
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-type: "external"
+    service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: "ip"
+spec:
+  type: LoadBalancer
+  selector:
+    app: office-backend
+  ports:
+    - name: http
+      port: 8000
+      targetPort: 8000
+      protocol: TCP

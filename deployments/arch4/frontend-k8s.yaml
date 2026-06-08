@@ -1,0 +1,49 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: office-frontend
+  namespace: default
+  labels:
+    app: office-frontend
+    arch: "4"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: office-frontend
+  template:
+    metadata:
+      labels:
+        app: office-frontend
+    spec:
+      containers:
+        - name: frontend
+          image: 203557140324.dkr.ecr.us-east-1.amazonaws.com/frontendrepo:latest
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "250m"
+              memory: "256Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: office-frontend-svc
+  namespace: default
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-type: "external"
+    service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: "ip"
+spec:
+  type: LoadBalancer
+  selector:
+    app: office-frontend
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+      protocol: TCP

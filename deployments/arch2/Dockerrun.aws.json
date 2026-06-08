@@ -1,0 +1,21 @@
+{
+  "AWSEBDockerrunVersion": "1",
+  "Image": {
+    "Name": "203557140324.dkr.ecr.us-east-1.amazonaws.com/backend-app:latest",
+    "Update": "true"
+  },
+  "Ports": [
+    {
+      "ContainerPort": 8000,
+      "HostPort": 8000
+    }
+  ],
+  "Environment": [
+    { "name": "DATABASE_URL", "value": "postgresql://postgres:postgres@172.31.47.210:5432/officedb" },
+    { "name": "JWT_SECRET_KEY", "value": "supersecretkeyofficemanagerpro12345" },
+    { "name": "JWT_ALGORITHM", "value": "HS256" },
+    { "name": "ACCESS_TOKEN_EXPIRE_MINUTES", "value": "60" }
+  ],
+  "Volumes": [],
+  "Logging": "/var/log/app"
+}
