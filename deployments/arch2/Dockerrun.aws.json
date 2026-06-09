@@ -1,7 +1,7 @@
 {
   "AWSEBDockerrunVersion": "1",
   "Image": {
-    "Name": "203557140324.dkr.ecr.us-east-1.amazonaws.com/backend-app:latest",
+    "Name": "542119827880.dkr.ecr.us-east-1.amazonaws.com/ecr-2-task",
     "Update": "true"
   },
   "Ports": [
