@@ -1,0 +1,57 @@
+{
+  "family": "office-backend-task",
+  "networkMode": "awsvpc",
+  "executionRoleArn": "arn:aws:iam::542119827880:role/office-ecs-execution-role",
+  "containerDefinitions": [
+    {
+      "name": "office-backend",
+      "image": "542119827880.dkr.ecr.ap-south-2.amazonaws.com/office-backend-repo:latest",
+      "cpu": 256,
+      "memory": 512,
+      "portMappings": [
+        {
+          "containerPort": 8000,
+          "hostPort": 8000,
+          "protocol": "tcp"
+        }
+      ],
+      "essential": true,
+      "environment": [
+        {
+          "name": "DATABASE_URL",
+          "value": "postgresql://postgres:postgres@172.31.2.177:5432/officedb"
+        },
+        {
+          "name": "JWT_SECRET_KEY",
+          "value": "supersecretkeyofficemanagerpro12345"
+        },
+        {
+          "name": "JWT_ALGORITHM",
+          "value": "HS256"
+        },
+        {
+          "name": "ACCESS_TOKEN_EXPIRE_MINUTES",
+          "value": "60"
+        },
+        {
+          "name": "GROQ_API_KEY",
+          "value": "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"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/office-backend-task",
+          "awslogs-region": "ap-south-2",
+          "awslogs-stream-prefix": "ecs",
+          "awslogs-create-group": "true"
+        }
+      }
+    }
+  ],
+  "requiresCompatibilities": [
+    "FARGATE"
+  ],
+  "cpu": "256",
+  "memory": "512"
+}

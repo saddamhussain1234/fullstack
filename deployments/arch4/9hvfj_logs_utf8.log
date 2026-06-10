@@ -1,0 +1,25 @@
+﻿{"level":"info","ts":"2026-06-10T12:18:56Z","msg":"version","GitVersion":"v3.4.0","GitCommit":"3f1e9707ac4ce65504d72b425e82be5245b38e0e","BuildDate":"2026-06-03T00:34:07+0000"}
+{"level":"info","ts":"2026-06-10T12:18:56Z","logger":"setup","msg":"Disabling ALBGatewayAPI: missing required CRDs","missing":["Gateway","GatewayClass","HTTPRoute","GRPCRoute"]}
+{"level":"info","ts":"2026-06-10T12:18:56Z","logger":"setup","msg":"Disabling NLBGatewayAPI: missing required CRDs","missing":["TCPRoute","UDPRoute","Gateway","GatewayClass","TLSRoute"]}
+{"level":"info","ts":"2026-06-10T12:18:56Z","logger":"setup","msg":"Disabling GatewayListenerSet: missing required CRDs","missing":["ListenerSet"]}
+{"level":"info","ts":"2026-06-10T12:18:56Z","logger":"setup","msg":"adding health check for controller"}
+{"level":"info","ts":"2026-06-10T12:18:56Z","logger":"setup","msg":"adding readiness check for webhook"}
+{"level":"info","ts":"2026-06-10T12:18:56Z","logger":"controller-runtime.webhook","msg":"Registering webhook","path":"/mutate-v1-pod"}
+{"level":"info","ts":"2026-06-10T12:18:56Z","logger":"controller-runtime.webhook","msg":"Registering webhook","path":"/mutate-v1-pod-server-id"}
+{"level":"info","ts":"2026-06-10T12:18:56Z","logger":"controller-runtime.webhook","msg":"Registering webhook","path":"/mutate-v1-service"}
+{"level":"info","ts":"2026-06-10T12:18:56Z","logger":"controller-runtime.webhook","msg":"Registering webhook","path":"/validate-elbv2-k8s-aws-v1beta1-ingressclassparams"}
+{"level":"info","ts":"2026-06-10T12:18:56Z","logger":"controller-runtime.webhook","msg":"Registering webhook","path":"/mutate-elbv2-k8s-aws-v1beta1-targetgroupbinding"}
+{"level":"info","ts":"2026-06-10T12:18:56Z","logger":"controller-runtime.webhook","msg":"Registering webhook","path":"/validate-elbv2-k8s-aws-v1beta1-targetgroupbinding"}
+{"level":"info","ts":"2026-06-10T12:18:56Z","logger":"controller-runtime.webhook","msg":"Registering webhook","path":"/validate-networking-v1-ingress"}
+{"level":"info","ts":"2026-06-10T12:18:56Z","logger":"setup","msg":"starting podInfo repo"}
+{"level":"info","ts":"2026-06-10T12:18:56Z","logger":"setup","msg":"starting deferred tgb reconciler"}
+{"level":"info","ts":"2026-06-10T12:18:58Z","logger":"setup","msg":"starting collect top talkers"}
+{"level":"info","ts":"2026-06-10T12:18:58Z","logger":"setup","msg":"starting collect cache size"}
+{"level":"info","ts":"2026-06-10T12:18:58Z","logger":"controller-runtime.metrics","msg":"Starting metrics server"}
+{"level":"info","ts":"2026-06-10T12:18:58Z","msg":"starting server","name":"health probe","addr":"[::]:61779"}
+{"level":"info","ts":"2026-06-10T12:18:58Z","logger":"controller-runtime.metrics","msg":"Serving metrics server","bindAddress":":8080","secure":false}
+{"level":"info","ts":"2026-06-10T12:18:58Z","logger":"controller-runtime.webhook","msg":"Starting webhook server"}
+{"level":"info","ts":"2026-06-10T12:18:58Z","logger":"controller-runtime.certwatcher","msg":"Updated current TLS certificate","cert":"/tmp/k8s-webhook-server/serving-certs/tls.crt","key":"/tmp/k8s-webhook-server/serving-certs/tls.key"}
+{"level":"info","ts":"2026-06-10T12:18:58Z","logger":"controller-runtime.webhook","msg":"Serving webhook server","host":"","port":9443}
+{"level":"info","ts":"2026-06-10T12:18:58Z","logger":"controller-runtime.certwatcher","msg":"Starting certificate poll+watcher","cert":"/tmp/k8s-webhook-server/serving-certs/tls.crt","key":"/tmp/k8s-webhook-server/serving-certs/tls.key","interval":10}
+{"level":"info","ts":"2026-06-10T12:18:58Z","msg":"Attempting to acquire leader lease...","lock":"kube-system/aws-load-balancer-controller-leader"}

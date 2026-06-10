@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: 203557140324.dkr.ecr.us-east-1.amazonaws.com/frontendrepo:latest
+          image: 542119827880.dkr.ecr.ap-south-2.amazonaws.com/office-frontend-repo:latest
           ports:
             - containerPort: 80
           resources:
@@ -36,8 +36,10 @@ metadata:
   name: office-frontend-svc
   namespace: default
   annotations:
+    service.beta.kubernetes.io/aws-load-balancer-class: "elbv2"
     service.beta.kubernetes.io/aws-load-balancer-type: "external"
     service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: "ip"
+    service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing"
 spec:
   type: LoadBalancer
   selector:

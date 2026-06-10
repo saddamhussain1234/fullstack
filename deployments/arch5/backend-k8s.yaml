@@ -19,12 +19,12 @@ spec:
     spec:
       containers:
         - name: backend
-          image: 203557140324.dkr.ecr.us-east-1.amazonaws.com/backend-app:latest
+          image: 542119827880.dkr.ecr.us-east-1.amazonaws.com/backend-app:latest
           ports:
             - containerPort: 8000
           env:
             - name: DATABASE_URL
-              value: "postgresql://postgres:postgres@172.31.47.210:5432/officedb"
+              value: "postgresql://postgres:postgres@52.55.225.111:5432/officedb"
             - name: JWT_SECRET_KEY
               value: "supersecretkeyofficemanagerpro12345"
             - name: JWT_ALGORITHM
@@ -53,6 +53,7 @@ metadata:
   annotations:
     service.beta.kubernetes.io/aws-load-balancer-type: "external"
     service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: "ip"
+    service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing"
 spec:
   type: LoadBalancer
   selector:
