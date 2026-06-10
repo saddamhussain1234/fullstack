@@ -11,7 +11,7 @@
     }
   ],
   "Environment": [
-    { "name": "DATABASE_URL", "value": "postgresql://postgres:postgres@172.31.47.210:5432/officedb" },
+    { "name": "DATABASE_URL", "value": "postgresql://postgres:postgres@172.31.2.177:5432/officedb" },
     { "name": "JWT_SECRET_KEY", "value": "supersecretkeyofficemanagerpro12345" },
     { "name": "JWT_ALGORITHM", "value": "HS256" },
     { "name": "ACCESS_TOKEN_EXPIRE_MINUTES", "value": "60" }

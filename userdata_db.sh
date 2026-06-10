@@ -121,4 +121,9 @@ INSERT INTO departments (id, name, description, manager_name) VALUES
 (3, 'Finance', 'Financial planning, accounting, and budgeting', 'Alice Johnson'),
 (4, 'Marketing', 'Brand management, advertising, and public relations', 'Bob Brown')
 ON CONFLICT (id) DO UPDATE SET name = EXCLUDED.name, description = EXCLUDED.description, manager_name = EXCLUDED.manager_name;
+
+-- Reset primary key sequences to avoid unique constraint violations
+SELECT setval('departments_id_seq', (SELECT MAX(id) FROM departments));
+SELECT setval('roles_id_seq', (SELECT MAX(id) FROM roles));
 "
+
